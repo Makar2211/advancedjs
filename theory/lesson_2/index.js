@@ -1,3 +1,57 @@
+//так писали в стандарте es5 and >
+function Mammel () {
+  this.eyes = 2, 
+  this.body = true,
+  this.breed = 'mammel',
+  this.paws = 4
+}
+
+const animal = new Mammel();
+  
+function Dogs() {
+  this.breed = 'dog'
+ 
+}
+Dogs.prototype = animal;
+
+function Husky () {
+  this.breed = 'Husky'
+  this.say = () => {
+    console.log('gaf gaf')
+  }
+}
+Husky.prototype = animal;
+
+const dog = new Dogs();
+const husky = new Husky();
+
+
+//синтаксис es6 with class
+
+
+
+class User{
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+
+  }
+  fu() {
+
+  }
+}
+class NewUser extends User{
+  constructor(...args ) {
+    super(...args)
+  }
+ age = 10;
+}
+const user = new User('Makar', 17)
+const newUser = new NewUser('kolya', 50)
+debugger
+
+
+
 /* ToDo Типы данных */
 function typesExample_1() {
   const s = Symbol();
@@ -5,12 +59,11 @@ function typesExample_1() {
     x: 'x',
     [s]: 'symbol'
   };
-  
   for(let key in obj) {
     console.log(key)
   }
 }
-// typesExample_1();
+//typesExample_1();
 
 function typesExample_2() {
   const x = 10n;
