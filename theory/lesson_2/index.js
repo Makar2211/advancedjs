@@ -48,7 +48,6 @@ class NewUser extends User{
 }
 const user = new User('Makar', 17)
 const newUser = new NewUser('kolya', 50)
-debugger
 
 
 
@@ -70,14 +69,18 @@ function typesExample_2() {
   const y = BigInt(Number.MAX_SAFE_INTEGER);
   const result = x + y;
   const result2 = 5n/2n;
+  console.log(result);
+  console.log(result2);
+
   debugger
 }
-// typesExample_2();
+//typesExample_2();
 
 function typesExample_3() {
   console.log(typeof null)
 }
-// typesExample_3();
+
+//typesExample_3();
 
 
 /* ToDo Ссылочные типы */
@@ -87,10 +90,11 @@ function linkTypesExample_1() {
   };
   const obj2 = obj1;
   obj2.x = 2;
+  console.log(obj1)
   
   debugger
 }
-// linkTypesExample_1()
+//linkTypesExample_1()
 
 function linkTypesExample_2() {
   function fu1() {}
@@ -98,10 +102,11 @@ function linkTypesExample_2() {
   
   const fu2 = fu1;
   fu2.test = 'test2';
+  console.log(fu2.test)
   
   debugger
 }
-// linkTypesExample_2()
+//linkTypesExample_2()
 
 function linkTypesExample_3() {
   function fu() {
@@ -116,7 +121,7 @@ function linkTypesExample_3() {
   f1.test = 20;
   debugger
 }
-// linkTypesExample_3()
+//linkTypesExample_3()
 
 
 /* ToDo Примитивы как объекты */
@@ -126,9 +131,11 @@ function primitivesExample_1() {
   
   const t1 = typeof str1;
   const t2 = typeof str2;
+  console.log(t1)
+  console.log(t2)
   debugger
 }
-// primitivesExample_1()
+//primitivesExample_1()
 
 
 
@@ -154,7 +161,7 @@ function constructorsExample_2() {
   
   const user = new User('John', 31);
 }
-// constructorsExample_2()
+//constructorsExample_2()
 
 
 /* ToDo Прототип Объекта */
@@ -166,27 +173,27 @@ function objectProtoExample_1() {
   }
   console.log(obj.__proto__);
 }
-// objectProtoExample_1()
+//objectProtoExample_1()
 
 function objectProtoExample_2() {
   const arr = [ 1, 2, 3 ]
   console.log(arr.__proto__.map);
 }
-// objectProtoExample_2()
+//objectProtoExample_2()
 
 function objectProtoExample_3() {
   const str = 'str'
   str.__proto__.test = 'test'
   console.log(str.test);
 }
-// objectProtoExample_3()
+ //objectProtoExample_3()
 
 /* ToDo Прототип Функции */
 function functionProtoExample_1() {
   function fu() {}
   console.log(fu.prototype)
 }
-// functionProtoExample_1()
+//functionProtoExample_1()
 
 function functionProtoExample_2() {
   function User() {
@@ -201,7 +208,7 @@ function functionProtoExample_2() {
   console.log(user.test)
   console.log(user.__proto__ === User.prototype)
 }
-// functionProtoExample_2()
+functionProtoExample_2()
 
 
 /* ToDo Прототипное наследование Функции */
@@ -250,15 +257,19 @@ function classesInheritExample_1() {
   console.log(animal);
   debugger
   
-  class Dog extends Animal {
-    constructor(...args) {
-      super(...args);
+  class Cat extends Animal {
+    constructor(eyes, ...args) {
+      super(eyes,...args);
     }
-    name = 'dog'
+    eyes = 2
+    name = 'cat'
+    godsay()  {
+      console.log('cat meow')
+    }
   }
   
-  const dog = new Dog();
-  console.log(dog);
+  const cat = new Cat();
+  console.log(cat.godsay());
   debugger
 }
-// classesInheritExample_1()
+classesInheritExample_1()

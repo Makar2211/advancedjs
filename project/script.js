@@ -1,19 +1,34 @@
 const goods = [
-  { title: 'Shirt', price: 150 },
-  { title: 'Socks', price: 50 },
-  { title: 'Jacket', price: 350 },
-  { title: 'Shoes', price: 250 },
+  { product_name: 'Shirt', price: 150 },
+  { product_name: 'Socks', price: 50 },
+  { product_name: 'Jacket', price: 350 },
+  { product_name: 'Shoes', price: 250 },
 ];
 
+const GET_GOODS_ITEMS = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+const GOODS = `${GET_GOODS_ITEMS}/catalogData.json`;
+
+function service(url , callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', url)
+ 
+  
+  const loadHandler = () => {
+    callback(JSON.parse(xhr.response));
+  }
+  xhr.onload = loadHandler;
+  xhr.send();
+} 
+
 class GoodsItem {
-  constructor({title ='', price = 0}){
-    this.title = title;
+  constructor({product_name ='', price = 0}){
+    this.product_name = product_name;
     this.price = price;
   }
   render() {
     return  `
       <div class="goods-item">
-        <h3>${this.title}</h3>
+        <h3>${this.product_name}</h3>
         <p>${this.price} грн</p>
       </div>
     `
@@ -21,8 +36,12 @@ class GoodsItem {
 }
 
 class GoodsList{
-  fetchData() {
-    this.list = goods
+  list = [];
+  fetchGoods(callback) {
+    service(GOODS, (data) => {
+      this.list = data
+      callback()
+    });
   }
   getCount() {
     return goods.reduce((total, item ) => total + item.price, 0) 
@@ -36,10 +55,18 @@ class GoodsList{
   }
 }
 
+class BasketGoods {
+  list = [];
+  fetchGoods() {
+  }
+}
+
 
 const goodsList = new GoodsList(goods);
-goodsList.fetchData();
-goodsList.render();
-goodsList.getCount();
+goodsList.fetchGoods(() => {
+  goodsList.render();
+});
 
 
+const basketGoods = new BasketGoods()
+basketGoods.fetchData()
