@@ -1,3 +1,181 @@
+/* const x =  ' global'
+//debugger
+
+function fu1() {  
+   const x = 'fu1'
+   //debugger
+   {
+      const x = 'block'
+       try {
+         throw new Error()
+       } catch (error) {
+         const x = 'try catch'
+       }
+   }
+}
+fu1() */
+
+/* if(false) {
+   var x = 'test'
+}  */
+
+
+//замыкание 
+/* function fu1 () {
+   const x = 10
+   function fu2() {
+      console.log(x)
+   }
+   return fu2();
+}
+
+const f = fu1();
+
+function f3(callback) {
+   callback;
+}
+
+f3(f); */
+
+
+                                      //контекст (this)
+/* var x = 10
+function fu1() {
+   console.log(this.x)
+}
+
+
+
+const obj = {
+   x: 20,
+   objFu: fu1
+}
+
+fu1() */
+
+                                     //потеря контекста
+/* function fu2(callback) {
+callback()
+}
+fu2(obj.objFu()) */
+
+//насильное присвоение контекста apply, bind, call
+/* const obj = {
+   x: 20,
+}
+
+function fu(a, b, c) {
+   console.log(this.x)
+} */
+
+//fu.apply(obj, [1, 2 ,3])
+//fu.call(obj, 1, 2, 3)
+//const fu2  = fu.bind(obj)
+//fu2()
+
+
+//this в конструторе
+
+
+/* function Fu1() {
+   console.log(this)
+   debugger
+}
+
+const fu1 = new Fu1() */
+
+/* class Fu1 {
+    x = 10;
+   fu() {
+      console.log(this.x)
+      debugger
+   }
+}
+
+const fu1 = new Fu1()
+function fu2 (callback) {
+   callback()
+}
+fu2(fu1.fu) */
+ 
+
+//контекст и стрелочные функции
+
+
+
+
+/* class Fu {
+   fu = () => {
+      console.log(this)
+      debugger
+   }
+}
+
+const obj = new Fu()
+
+
+function f2(callback) {
+   callback();
+}
+
+
+fu2(obj.fu) */
+
+
+/* function fu() {
+   const fu2 = () => {
+      console.log(this)
+   }
+   fu2()
+}
+
+fu.call({
+   name: 'Jobn'
+})
+
+fu.call({
+   name: 'Makar'
+}) */
+
+//promise
+/* const pormise = new Promise((resolve, reject) => {
+   setTimeout(() => {
+      const x  = Math.floor(Math.random() * 100 )
+      if(x >=50) {
+         reject(new Error('вы проиграли, число больше или равна 50'))
+      } else {
+         resolve(`число равно ${x}`)
+      }
+   }, 0)
+  
+})
+
+pormise.then((x) => {
+   console.log(`win - ${x}`)
+})
+
+pormise.catch((x) => {
+console.Error(`lose - ${x}`)
+}) */
+
+//fetch
+/* fetch('https://run.mocky.io/v3/0644da2e-74fb-49d7-aaa0-f837a7c5540f');
+then((res) =>  res.json())
+.then((data) => {
+   debugger
+}) */
+
+
+//регулярные вырожение это ссылочный тип 
+
+const str = 'hello world!'
+const re = new RegExp('world', 'gi')
+const re2 = /world/gi
+const res = str.match(re)
+const res2 = str.replace(re, 'test')
+const test = re.test(str)
+
+
 /* ToDo Promises */
 
 const promiseActionsTemplate_1 = () => {
@@ -6,7 +184,7 @@ const promiseActionsTemplate_1 = () => {
    })
    debugger
 }
-// promiseActionsTemplate_1()
+//promiseActionsTemplate_1()
 const promiseActionsTemplate_2 = () => {
    const promise = new Promise((resolve) => {
       console.log('hello from promise!')
@@ -17,7 +195,7 @@ const promiseActionsTemplate_2 = () => {
       debugger
    })
 }
-// promiseActionsTemplate_2()
+//promiseActionsTemplate_2()
 
 const promiseActionsTemplate_3 = () => {
    const promise = new Promise((resolve, reject) => {
@@ -41,20 +219,43 @@ const promiseActionsTemplate_3 = () => {
    })
    
 }
+//promiseActionsTemplate_3()
 
-// promiseActionsTemplate_3();
+function myFun(){
+   const promise = new Promise((resolve, reject) => {
+      setInterval(() => {
+         const sum = Math.floor(Math.random() * 200)
+   
+         if(sum >= 100) {
+            resolve(sum)
+   
+         } else {
+            reject(new Error('ошибка'))
+         }
+      }, 1000);
+   })
+
+promise.then((random) => {
+   console.log(`число ${random}  прошло проверку`)
+})
+promise.catch((random) => {
+   console.log(`число ${random}  не прошло проверку`)
+})
+}
+//myFun()
+
 
 const promiseActionsTemplate_4 = () => {
 
 }
-// promiseActionsTemplate_4();
+//promiseActionsTemplate_4();
 
 
 /* ToDo fetch */
 const fetchExample_1 = () => {
    fetch('https://jsonplaceholder.typicode.com/posts/1')
 }
-// fetchExample_1()
+//fetchExample_1()
 
 const fetchExample_2 = () => {
    fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -70,17 +271,18 @@ const fetchExample_2 = () => {
    })
 }
 
-// fetchExample_1()
+//fetchExample_2()
 
 /* ToDo this */
 
 const thisExample_1 = () => {
    function fu() {
       console.log(this)
+      debugger
    }
    fu()
 }
-// thisExample_1()
+//thisExample_1()
 
 const thisExample_2 = () => {
    'use strict'
@@ -89,7 +291,7 @@ const thisExample_2 = () => {
    }
    fu()
 }
-// thisExample_2()
+//thisExample_2()
 
 const thisExample_3 = () => {
    function fu() {
@@ -104,7 +306,7 @@ const thisExample_3 = () => {
    fu();
    obj.fu()
 }
-// thisExample_3()
+//thisExample_3()
 
 const thisExample_4 = () => {
    function fu() {
@@ -142,7 +344,7 @@ const thisExample_5 = () => {
    
    fu(obj.sayThis);
 }
-// thisExample_5();
+//thisExample_5();
 
 const thisExample_6 = () => {
    function User() {
@@ -150,7 +352,7 @@ const thisExample_6 = () => {
       console.log(this)
    }
 }
-// thisExample_6();
+//thisExample_6();
 
 const thisExample_7 = () => {
    function fu() {
@@ -158,11 +360,13 @@ const thisExample_7 = () => {
          console.log('arrowFu', this)
       }
       return arrowFu;
+      debugger
    }
    
    const bar = fu.call({
       name: 'John'
    })
+   debugger
    
    bar();
    
@@ -170,10 +374,12 @@ const thisExample_7 = () => {
       name: 'Lu',
       bar
    }
+   debugger
    
    obj.bar();
+   debugger
 }
-// thisExample_7();
+thisExample_7();
 
 /* ToDo Регулярные выражения */
 
