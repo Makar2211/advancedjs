@@ -2,31 +2,48 @@
 <html lang="en">
 <head>
    <meta charset="UTF-8">
-   <link rel="stylesheet" href="../project/style.css">
    <title>eShop</title>
+   <link rel="stylesheet" href="style.css">
+   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+   <script src="script.js"></script>
 </head>
 <body>
-   <div class="container">
+   <div id="root" style="max-width: 1140px; margin: 0 auto">
       <header>
-         <div class="left">
-            <div class="logo">
-               eShop
+         <h1 class="title" style="padding-left: 10px;">eShop</h1>
+         <div class="search">
+            <input type="text" class="goods-search" v-model="search"/>
+            <button class="search-button" type="button" v-on:click="filterItems">Искать</button>
+            <div class="actions">
+               <button class="cart-button" type="button" @click="setIsVisibleCart">Корзина</button>
             </div>
          </div>
-         <div class="right">
-            
-            <div class="search">
-               <input type="text" class="goods-search" />
-               <button class="search-button" type="button">Искать</button>
-            </div>
-            
-            <button class="cart-button" type="button">Корзина</button>
-         </div>
+         
       </header>
       <main>
-         <div class="goods-list"></div>
+         <div class="goods-list" v-if="filteredItems.length">
+            <div class="goods-item" v-for="item in filteredItems">
+               <h3>{{ item.product_name }}</h3>
+               <p>{{ item.price }}</p>
+            </div>
+         </div>
+         <div v-else>нет данных</div>
+         <div>{{ calculatePrice }}</div>
       </main>
+      
+
+      <div class="fixed-area" v-if="isVisibleCart">
+         <div class="basket-card"  >
+            <div class="basket-card__header">
+               <h1 class="basket-card__header__title">basket card</h1>
+               <div class="basket-card__header__delete-icon" @click="setIsVisibleCart"
+               ></div>
+            </div>
+            <div class="basket-card__content">
+               content
+            </div>
+         </div>
+      </div>
    </div>
-<script src="script.js"></script>
 </body>
 </html>
