@@ -1,4 +1,4 @@
-function init() {
+/* function init() {
    const ComponentA = Vue.component('component-a', {
       props: [
          'content'
@@ -45,5 +45,54 @@ function init() {
       }
    })
 }
+
+window.onload = init
+ */
+
+function init() {
+   Vue.component('first-teamplate', {
+      props: [
+         'text'
+      ],
+      template: `
+      <div @click="$emit('myheart', $event.target)"> {{text}} {{massage}}</div>
+     
+      `,
+      data() {
+         return{
+           massage: 'hello world!'
+         }
+      },
+   })
+
+   Vue.component('second-comp', {
+      data() {
+         return {
+            isVisible: false,
+         }
+      },
+      teamplate :`
+         <div> @click=$emit('myclick' $event.target)
+            <div class="modal" v-if="isVisible">
+               <h1>htllo</h1>
+               <div class="close" @myclick="click">close</div>
+            </div>
+         </div>
+      `
+   })
+
+    const app = new Vue({
+      el: '#root',
+      methods: {
+         log(arg) {
+            console.log(arg)
+         },
+         click() {
+            this.isVisible = !this.isVisible
+         }
+      },
+    })
+}
+
 
 window.onload = init

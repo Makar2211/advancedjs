@@ -8,42 +8,30 @@
    <script src="script.js"></script>
 </head>
 <body>
-   <div id="root" style="max-width: 1140px; margin: 0 auto">
+   <div id="root" class="container">
       <header>
-         <h1 class="title" style="padding-left: 10px;">eShop</h1>
-         <div class="search">
-            <input type="text" class="goods-search" v-model="search"/>
-            <button class="search-button" type="button" v-on:click="filterItems">Искать</button>
-            <div class="actions">
-               <button class="cart-button" type="button" @click="setIsVisibleCart">Корзина</button>
+         <h1 class="title">eShop</h1>
+         <div class="left">
+            <div class="search">
+               <custom-search  v-model="search"></custom-search>
+              <!--  <input type="text" class="goods-search" v-model="search"/>
+               <custom-button v-on:click="filterItems">искать</custom-button> -->
+            </div>
+            <div class="actions" style="margin-top: 19px;
+            margin-left: 10px;">
+               <custom-button v-on:click="setVisionCard">Корзина</custom-button>
             </div>
          </div>
-         
       </header>
       <main>
-         <div class="goods-list" v-if="filteredItems.length">
-            <div class="goods-item" v-for="item in filteredItems">
-               <h3>{{ item.product_name }}</h3>
-               <p>{{ item.price }}</p>
-            </div>
+         <div class="goods-list">
+            <goods-item v-for="item in filteredItems" v-bind:item="item" ></goods-item>
          </div>
-         <div v-else>нет данных</div>
-         <div>{{ calculatePrice }}</div>
       </main>
-      
+      <basket-goods v-if="cardIsVision" v-on:closeclick="setVisionCard"></basket-goods>
 
-      <div class="fixed-area" v-if="isVisibleCart">
-         <div class="basket-card"  >
-            <div class="basket-card__header">
-               <h1 class="basket-card__header__title">basket card</h1>
-               <div class="basket-card__header__delete-icon" @click="setIsVisibleCart"
-               ></div>
-            </div>
-            <div class="basket-card__content">
-               content
-            </div>
-         </div>
-      </div>
+
+<!--      <div>{{ calculatePrice }}</div>-->
    </div>
 </body>
 </html>

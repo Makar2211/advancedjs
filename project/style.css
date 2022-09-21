@@ -13,6 +13,11 @@ header{
 }
 .right{
     display: flex;
+    
+}
+.left{
+    display: flex;
+    margin-right: 40px;
 }
 .left .logo{
     font-size: 35px;
