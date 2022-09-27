@@ -1,13 +1,1 @@
-[
-    {
-        "id_product": 1,
-        "count": 1
-        
-
-
-    },
-    {
-        "id_product": 3,
-        "count": 2
-    }
-]
+[{"id":1,"count":119},{"id":2,"count":80},{"id":3,"count":80},{"id":4,"count":80}]

@@ -63,6 +63,8 @@ header{
     border-radius: 16px;
     padding: 49px 39px 47px 39p;
     padding: 20px;
+    display: grid;
+    grid-template-rows: min-content auto min-content;
     
 }
 .search {
@@ -129,7 +131,7 @@ header{
 }
 
 .basket-card__header__delete-icon {
-    background-image: url("img/delete_icon.png");
+    background-image: url("./img/delete_icon.png");
     background-size: contain;
     width: 30px;
     height: 30px;
@@ -139,4 +141,8 @@ header{
 
 .basket-card__content {
     padding: 10px;
+}
+.basket-item{
+    display: flex;
+    justify-content: space-around;
 }
